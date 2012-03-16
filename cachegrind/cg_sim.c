@@ -179,7 +179,8 @@ block2:                                                                     \
       set[0] = tag2;                                                        \
       is_miss = True;                                                       \
 miss_treatment:                                                             \
-      if (is_miss) { MISS_TREATMENT; }                                      \
+      if (is_miss) {                                                        \
+         MISS_TREATMENT; }                                                  \
                                                                             \
    } else {                                                                 \
        VG_(printf)("addr: %lx  size: %u  sets: %d %d", a, size, set1, set2);\
@@ -188,7 +189,7 @@ miss_treatment:                                                             \
    return;                                                                  \
 }
 
-CACHESIM(LL, (*mL)++ );
+CACHESIM(LL, { (*mL)++; VG_(printf)("mem: %lx\n", a);} );
 CACHESIM(I1, { (*m1)++; cachesim_LL_doref(a, size, m1, mL); } );
 CACHESIM(D1, { (*m1)++; cachesim_LL_doref(a, size, m1, mL); } );
 
