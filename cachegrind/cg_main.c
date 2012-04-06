@@ -319,7 +319,7 @@ void log_1I_0D_cache_access(InstrInfo* n)
    //VG_(printf)("1I_0D :  CCaddr=0x%010lx,  iaddr=0x%010lx,  isize=%lu\n",
    //             n, n->instr_addr, n->instr_len);
    cachesim_I1_doref(n->instr_addr, n->instr_len, 
-                     &n->parent->Ir.m1, &n->parent->Ir.mL);
+                     &n->parent->Ir.m1, &n->parent->Ir.mL, "Ir");
    n->parent->Ir.a++;
 }
 
@@ -331,10 +331,10 @@ void log_2I_0D_cache_access(InstrInfo* n, InstrInfo* n2)
    //            n,  n->instr_addr,  n->instr_len,
    //            n2, n2->instr_addr, n2->instr_len);
    cachesim_I1_doref(n->instr_addr, n->instr_len, 
-                     &n->parent->Ir.m1, &n->parent->Ir.mL);
+                     &n->parent->Ir.m1, &n->parent->Ir.mL, "Ir");
    n->parent->Ir.a++;
    cachesim_I1_doref(n2->instr_addr, n2->instr_len, 
-                     &n2->parent->Ir.m1, &n2->parent->Ir.mL);
+                     &n2->parent->Ir.m1, &n2->parent->Ir.mL, "Ir");
    n2->parent->Ir.a++;
 }
 
@@ -348,13 +348,13 @@ void log_3I_0D_cache_access(InstrInfo* n, InstrInfo* n2, InstrInfo* n3)
    //            n2, n2->instr_addr, n2->instr_len,
    //            n3, n3->instr_addr, n3->instr_len);
    cachesim_I1_doref(n->instr_addr, n->instr_len, 
-                     &n->parent->Ir.m1, &n->parent->Ir.mL);
+                     &n->parent->Ir.m1, &n->parent->Ir.mL, "Ir");
    n->parent->Ir.a++;
    cachesim_I1_doref(n2->instr_addr, n2->instr_len, 
-                     &n2->parent->Ir.m1, &n2->parent->Ir.mL);
+                     &n2->parent->Ir.m1, &n2->parent->Ir.mL, "Ir");
    n2->parent->Ir.a++;
    cachesim_I1_doref(n3->instr_addr, n3->instr_len, 
-                     &n3->parent->Ir.m1, &n3->parent->Ir.mL);
+                     &n3->parent->Ir.m1, &n3->parent->Ir.mL, "Ir");
    n3->parent->Ir.a++;
 }
 
@@ -365,11 +365,11 @@ void log_1I_1Dr_cache_access(InstrInfo* n, Addr data_addr, Word data_size)
    //            "                               daddr=0x%010lx,  dsize=%lu\n",
    //            n, n->instr_addr, n->instr_len, data_addr, data_size);
    cachesim_I1_doref(n->instr_addr, n->instr_len, 
-                     &n->parent->Ir.m1, &n->parent->Ir.mL);
+                     &n->parent->Ir.m1, &n->parent->Ir.mL, "Ir");
    n->parent->Ir.a++;
 
    cachesim_D1_doref(data_addr, data_size, 
-                     &n->parent->Dr.m1, &n->parent->Dr.mL);
+                     &n->parent->Dr.m1, &n->parent->Dr.mL, "Dr");
    n->parent->Dr.a++;
 }
 
@@ -380,11 +380,11 @@ void log_1I_1Dw_cache_access(InstrInfo* n, Addr data_addr, Word data_size)
    //            "                               daddr=0x%010lx,  dsize=%lu\n",
    //            n, n->instr_addr, n->instr_len, data_addr, data_size);
    cachesim_I1_doref(n->instr_addr, n->instr_len, 
-                     &n->parent->Ir.m1, &n->parent->Ir.mL);
+                     &n->parent->Ir.m1, &n->parent->Ir.mL, "Ir");
    n->parent->Ir.a++;
 
    cachesim_D1_doref(data_addr, data_size, 
-                     &n->parent->Dw.m1, &n->parent->Dw.mL);
+                     &n->parent->Dw.m1, &n->parent->Dw.mL, "Dw");
    n->parent->Dw.a++;
 }
 
@@ -394,7 +394,7 @@ void log_0I_1Dr_cache_access(InstrInfo* n, Addr data_addr, Word data_size)
    //VG_(printf)("0I_1Dr:  CCaddr=0x%010lx,  daddr=0x%010lx,  dsize=%lu\n",
    //            n, data_addr, data_size);
    cachesim_D1_doref(data_addr, data_size, 
-                     &n->parent->Dr.m1, &n->parent->Dr.mL);
+                     &n->parent->Dr.m1, &n->parent->Dr.mL, "Dr");
    n->parent->Dr.a++;
 }
 
@@ -404,7 +404,7 @@ void log_0I_1Dw_cache_access(InstrInfo* n, Addr data_addr, Word data_size)
    //VG_(printf)("0I_1Dw:  CCaddr=0x%010lx,  daddr=0x%010lx,  dsize=%lu\n",
    //            n, data_addr, data_size);
    cachesim_D1_doref(data_addr, data_size, 
-                     &n->parent->Dw.m1, &n->parent->Dw.mL);
+                     &n->parent->Dw.m1, &n->parent->Dw.mL, "Dw");
    n->parent->Dw.a++;
 }
 

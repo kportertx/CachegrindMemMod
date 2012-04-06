@@ -96,7 +96,7 @@ static void cachesim_##L##_initcache(cache_t config)                        \
 /* bigger than its usual limit.  Inlining gains around 5--10% speedup. */   \
 __attribute__((always_inline))                                              \
 static __inline__                                                           \
-void cachesim_##L##_doref(Addr a, UChar size, ULong* m1, ULong *mL)         \
+void cachesim_##L##_doref(Addr a, UChar size, ULong* m1, ULong *mL, char *type)    \
 {                                                                           \
    UInt  set1 = ( a         >> L.line_size_bits) & (L.sets_min_1);          \
    UInt  set2 = ((a+size-1) >> L.line_size_bits) & (L.sets_min_1);          \
@@ -189,9 +189,9 @@ miss_treatment:                                                             \
    return;                                                                  \
 }
 
-CACHESIM(LL, { (*mL)++; VG_(printf)("mem: %lx\n", a);} );
-CACHESIM(I1, { (*m1)++; cachesim_LL_doref(a, size, m1, mL); } );
-CACHESIM(D1, { (*m1)++; cachesim_LL_doref(a, size, m1, mL); } );
+CACHESIM(LL, { (*mL)++; VG_(printf)("%s: 0x%lx\n", type, a);} );
+CACHESIM(I1, { (*m1)++; cachesim_LL_doref(a, size, m1, mL, type); } );
+CACHESIM(D1, { (*m1)++; cachesim_LL_doref(a, size, m1, mL, type); } );
 
 /*--------------------------------------------------------------------*/
 /*--- end                                                 cg_sim.c ---*/
