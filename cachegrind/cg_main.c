@@ -1,4 +1,3 @@
-
 /*--------------------------------------------------------------------*/
 /*--- Cachegrind: everything but the simulation itself.            ---*/
 /*---                                                    cg_main.c ---*/
@@ -49,6 +48,7 @@
 #include "cg_arch.h"
 #include "cg_sim.c"
 #include "cg_branchpred.c"
+#include <stdio.h>
 
 /*------------------------------------------------------------*/
 /*--- Constants                                            ---*/
@@ -1647,6 +1647,7 @@ static Bool cg_process_cmd_line_option(Char* arg)
                               &clo_D1_cache,
                               &clo_LL_cache)) {}
 
+   setvbuf(stdout, NULL, _IONBF, 0);
    else if VG_STR_CLO( arg, "--cachegrind-out-file", clo_cachegrind_out_file) {}
    else if VG_BOOL_CLO(arg, "--cache-sim",  clo_cache_sim)  {}
    else if VG_BOOL_CLO(arg, "--branch-sim", clo_branch_sim) {}
